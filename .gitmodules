@@ -1,0 +1,7 @@
+[submodule "glfw"]
+    path = third_part/glfw
+    url = git@github.com:yuuKiwAw/glfw.git
+
+[submodule "imgui"]
+    path = third_part/imgui
+    url = git@github.com:yuuKiwAw/imgui.git
