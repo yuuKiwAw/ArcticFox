@@ -2,6 +2,10 @@
     path = third_part/glfw
     url = git@github.com:yuuKiwAw/glfw.git
 
+[submodule "glm"]
+    path = third_part/glm
+    url = git@github.com:g-truc/glm.git
+
 [submodule "imgui"]
     path = third_part/imgui
     url = git@github.com:yuuKiwAw/imgui.git
