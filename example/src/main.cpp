@@ -1,7 +1,5 @@
-#include <iostream>
 #include "Application.hpp"
-
-ArcticFox::Application* app = new ArcticFox::Application();
+#include "EntryPoint.hpp"
 
 class ExampleLayer : public ArcticFox::Layer
 {
@@ -29,11 +27,10 @@ public:
 	}
 };
 
-int main(int argc, char** argv) {
+ArcticFox::Application* ArcticFox::CreateApplication(int argc, char** argv) {
+	ArcticFox::Application* app = new ArcticFox::Application();
     app->PushLayer<ExampleLayer>();
     app->PushLayer<ExampleLayer2>();
-    app->Run();
-    delete app;
 
-    return 0;
+	return app;
 }
