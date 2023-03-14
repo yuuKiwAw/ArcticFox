@@ -24,6 +24,8 @@ public:
     Application(const ApplicationSpecification& applicationSpecification = ApplicationSpecification());
     ~Application();
 
+    static Application& Get();
+
     void Run();
     void Close();
 

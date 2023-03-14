@@ -10,15 +10,23 @@ static void glfw_error_callback(int error, const char* description) {
 	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
+static ArcticFox::Application* s_Instance = nullptr;
+
 namespace ArcticFox {
     Application::Application(const ApplicationSpecification& secification)
         : m_Specification(secification)
     {
+        s_Instance = this;
+
         Init();
     }
 
     Application::~Application() {
         Shutdown();
+    }
+
+    Application& Application::Get() {
+        return *s_Instance;
     }
 
     void Application::Run() {
@@ -73,23 +81,32 @@ namespace ArcticFox {
 
                 ImGui::End();
             }
+
+            // Rendering
 			ImGui::Render();
             ImDrawData* main_draw_data = ImGui::GetDrawData();
             const bool main_is_minimized = (main_draw_data->DisplaySize.x <= 0.0f || main_draw_data->DisplaySize.y <= 0.0f);
 
-		    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-		    glClear(GL_COLOR_BUFFER_BIT);
+            if (!main_is_minimized) {
+                int display_w, display_h;
+                glfwGetFramebufferSize(m_WindowHandle, &display_w, &display_h);
+                glViewport(0, 0, display_w, display_h);
+		        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+		        glClear(GL_COLOR_BUFFER_BIT);
+		        ImGui_ImplOpenGL3_RenderDrawData(main_draw_data);
+            }
 
-            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-			{
+            // Update and Render additional Platform Windows
+            // (Platform functions may change the current OpenGL context, so we save/restore it to make it easier to paste this code elsewhere.
+            //  For this specific demo app we could also call glfwMakeContextCurrent(window) directly)
+            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+                GLFWwindow* backup_current_context = glfwGetCurrentContext();
                 ImGui::UpdatePlatformWindows();
 				ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent(backup_current_context);
 			}
 
-            if (!main_is_minimized) {
-		        ImGui_ImplOpenGL3_RenderDrawData(main_draw_data);
-		        glfwSwapBuffers(m_WindowHandle);
-            }
+		    glfwSwapBuffers(m_WindowHandle);
 
             float time = GetTime();
             m_FrameTime = time - m_LastFrameTime;
@@ -124,7 +141,7 @@ namespace ArcticFox {
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-		// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 		//io.ConfigViewportsNoAutoMerge = true;
 		//io.ConfigViewportsNoTaskBarIcon = true;
 
