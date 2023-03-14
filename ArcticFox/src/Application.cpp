@@ -196,7 +196,7 @@ namespace ArcticFox {
         return m_FPS;
     }
 
-    const GLFWwindow* Application::GetWindowHandle() {
+    GLFWwindow* Application::GetWindowHandle() const {
         return m_WindowHandle;
     }
 }

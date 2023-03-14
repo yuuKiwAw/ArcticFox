@@ -31,7 +31,7 @@ public:
 
     float GetTime();
     int GetFPS();
-    const GLFWwindow* GetWindowHandle();
+    GLFWwindow* GetWindowHandle() const;
 
     template<typename T>
     void PushLayer() {
