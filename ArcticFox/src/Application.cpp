@@ -95,6 +95,7 @@ namespace ArcticFox {
             m_FrameTime = time - m_LastFrameTime;
             m_TimeStep = glm::min<float>(m_FrameTime, 0.0333f);
             m_LastFrameTime = time;
+            CalculateFramesPerSecond();
         }
     }
 
@@ -156,7 +157,29 @@ namespace ArcticFox {
 	    glfwTerminate();
     }
 
+    void Application::CalculateFramesPerSecond()
+    {
+        static float framesPerSecond = 0.0f;
+        static float lastTime = 0.0f;
+        float currentTime = glfwGetTime();
+        ++framesPerSecond;
+        if( currentTime - lastTime > 1.0f )
+        {
+            lastTime = currentTime;
+            m_FPS = framesPerSecond;
+            framesPerSecond = 0;
+        }
+    }
+
     float Application::GetTime() {
         return (float)glfwGetTime();
+    }
+
+    int Application::GetFPS() {
+        return m_FPS;
+    }
+
+    const GLFWwindow* Application::GetWindowHandle() {
+        return m_WindowHandle;
     }
 }

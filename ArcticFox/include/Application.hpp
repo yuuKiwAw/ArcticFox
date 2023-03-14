@@ -28,6 +28,8 @@ public:
     void Close();
 
     float GetTime();
+    int GetFPS();
+    const GLFWwindow* GetWindowHandle();
 
     template<typename T>
     void PushLayer() {
@@ -41,6 +43,8 @@ private:
     void Init();
     void Shutdown();
 
+    void CalculateFramesPerSecond();
+
 private:
     ApplicationSpecification m_Specification;
     GLFWwindow* m_WindowHandle;
@@ -49,6 +53,7 @@ private:
     float m_TimeStep = 0.0f;
     float m_FrameTime = 0.0f;
 	float m_LastFrameTime = 0.0f;
+    int m_FPS = 0;
 
     std::vector<std::shared_ptr<Layer>> m_LayerStack;
 };
