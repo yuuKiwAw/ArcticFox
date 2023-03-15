@@ -22,8 +22,11 @@ target_include_directories(ArcticFox PRIVATE ../third_part/glm)
 target_include_directories(ArcticFox PRIVATE ../third_part/imgui)
 
 if(WIN32)
-    target_link_libraries(ArcticFox PRIVATE glfw opengl32.lib)
+    target_link_libraries(ArcticFox PRIVATE opengl32.lib)
+elseif(LINUX)
+    target_link_libraries(ArcticFox PRIVATE GL)
 endif()
+target_link_libraries(ArcticFox PRIVATE glfw)
 
 # Create generated files
 include(CMakePackageConfigHelpers)
