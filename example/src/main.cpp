@@ -1,9 +1,14 @@
 #include "Application.hpp"
 #include "EntryPoint.hpp"
 #include "Input/Input.hpp"
+#include "imgui.h"
+#include "Widgets/imfilebrowser.h"
 
 class ExampleLayer : public ArcticFox::Layer
 {
+private:
+	ImGui::FileBrowser fileDialog = ImGui::FileBrowser();
+
 public:
 	virtual void OnUpdate(float ts) override
 	{
@@ -15,14 +20,32 @@ public:
 	virtual void OnUIRender() override
 	{
 		ImGui::Begin("Hello ArcticFox");
-		// ImGui::Text("FPS: %d", ArcticFox::Application::Get().GetFPS());
-		// ImGui::Text("FPS:%.1f", ImGui::GetIO().Framerate);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		if (ImGui::Button("Button")) {
 
+		// select file dialog
+		if (ImGui::Button("Select File")) {
+			fileDialog.SetFlags(0);
+			fileDialog.SetTitle("Select file");
+			fileDialog.SetTypeFilters({".txt"});
+			fileDialog.Open();
         }
+
+		// select folder dialog
+		if (ImGui::Button("Select Folder")) {
+			fileDialog.SetFlags(ImGuiFileBrowserFlags_SelectDirectory);
+			fileDialog.SetTitle("Select folder");
+			fileDialog.Open();
+		}
+
+		// demo window
 		ImGui::ShowDemoWindow();
 		ImGui::End();
+
+		fileDialog.Display();
+		if (fileDialog.HasSelected()) {
+			std::cout << fileDialog.GetSelected().string() << std::endl;
+			fileDialog.ClearSelected();
+		}
 	}
 };
 
