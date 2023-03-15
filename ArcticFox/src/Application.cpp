@@ -6,6 +6,8 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
+#include "Fonts/Roboto-Regular.h"
+
 static void glfw_error_callback(int error, const char* description) {
 	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
@@ -154,6 +156,12 @@ namespace ArcticFox {
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
+
+        // Load default font
+		ImFontConfig fontConfig;
+		fontConfig.FontDataOwnedByAtlas = false;
+		ImFont* robotoFont = io.Fonts->AddFontFromMemoryTTF((void*)g_RobotoRegular, sizeof(g_RobotoRegular), 20.0f, &fontConfig);
+		io.FontDefault = robotoFont;
 
         // Setup Platform/Renderer backends
 	    ImGui_ImplGlfw_InitForOpenGL(m_WindowHandle, true);
