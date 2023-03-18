@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include "glm/glm.hpp"
 
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
+#include "imgui/backends/imgui_impl_glfw.h"
+#include "imgui/backends/imgui_impl_opengl3.h"
 
 #include "Fonts/Roboto-Regular.h"
 

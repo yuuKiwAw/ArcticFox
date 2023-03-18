@@ -18,6 +18,8 @@ aux_source_directory(src SRC_DIR)
 add_library(ArcticFox SHARED ${IMGUI_SRC} ${IMGUI_GLFW_BACKENDS} ${SRC_DIR})
 
 target_include_directories(ArcticFox PRIVATE include)
+target_include_directories(ArcticFox PRIVATE ../third_part)
+target_include_directories(ArcticFox PRIVATE ../third_part/glfw/include)
 target_include_directories(ArcticFox PRIVATE ../third_part/glm)
 target_include_directories(ArcticFox PRIVATE ../third_part/imgui)
 
@@ -65,8 +67,12 @@ install(
     FILES    
         "../third_part/imgui/imgui.h"
         "../third_part/imgui/imconfig.h"
+        "../third_part/imgui/imgui_internal.h"
+        "../third_part/imgui/imstb_rectpack.h"
+        "../third_part/imgui/imstb_textedit.h"
+        "../third_part/imgui/imstb_truetype.h"
     DESTINATION
-        include
+        include/imgui
     )
 
 install(

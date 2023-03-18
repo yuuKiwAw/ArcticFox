@@ -8,7 +8,7 @@
 #include <functional>
 
 #include "GLFW/glfw3.h"
-#include "imgui.h"
+#include "imgui/imgui.h"
 
 
 namespace ArcticFox {

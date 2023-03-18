@@ -1,7 +1,7 @@
 #include "Application.hpp"
 #include "EntryPoint.hpp"
 #include "Input/Input.hpp"
-#include "imgui.h"
+#include "imgui/imgui.h"
 #include "Widgets/imfilebrowser.h"
 
 class ExampleLayer : public ArcticFox::Layer
