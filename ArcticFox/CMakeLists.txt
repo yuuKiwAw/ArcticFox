@@ -41,7 +41,7 @@ write_basic_package_version_file(
 
 install(EXPORT ${PROJECT_NAME}
     FILE ArcticFoxConfig.cmake
-    DESTINATION share/${PROJECT_NAME}
+    DESTINATION lib/cmake/${PROJECT_NAME}
 )
 
 # Install files
@@ -79,5 +79,5 @@ install(
     FILES
         ${CMAKE_CURRENT_BINARY_DIR}/ArcticFoxConfigVersion.cmake
     DESTINATION
-        share/${PROJECT_NAME}
+        lib/cmake/${PROJECT_NAME}
     )
