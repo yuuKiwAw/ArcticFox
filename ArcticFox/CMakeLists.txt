@@ -27,6 +27,8 @@ if(WIN32)
     target_link_libraries(ArcticFox PRIVATE opengl32.lib)
 elseif(LINUX)
     target_link_libraries(ArcticFox PRIVATE GL)
+elseif(APPLE)
+    target_link_libraries(ArcticFox PRIVATE "-framework OpenGL")
 endif()
 target_link_libraries(ArcticFox PRIVATE glfw)
 
