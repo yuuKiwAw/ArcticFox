@@ -128,7 +128,7 @@ namespace ArcticFox {
             return;
 
 	    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
         m_WindowHandle = glfwCreateWindow(m_Specification.Width, m_Specification.Height, m_Specification.Name.c_str(), NULL, NULL);
         if (m_WindowHandle== NULL)
@@ -165,7 +165,7 @@ namespace ArcticFox {
 
         // Setup Platform/Renderer backends
 	    ImGui_ImplGlfw_InitForOpenGL(m_WindowHandle, true);
-	    ImGui_ImplOpenGL3_Init("#version 130");
+	    ImGui_ImplOpenGL3_Init("#version 330");
     }
 
     void Application::Shutdown() {
