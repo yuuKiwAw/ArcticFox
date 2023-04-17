@@ -52,6 +52,8 @@ namespace ArcticFox {
                 static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
                 ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
+                if (m_MenubarCallback)
+                    window_flags |= ImGuiWindowFlags_MenuBar;
 
                 const ImGuiViewport *viewport = ImGui::GetMainViewport();
                 ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -77,6 +79,15 @@ namespace ArcticFox {
 					ImGuiID dockspace_id = ImGui::GetID("OpenglAppDockspace");
 					ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 				}
+
+                if (m_MenubarCallback)
+                {
+                    if (ImGui::BeginMenuBar())
+                    {
+                        m_MenubarCallback();
+                        ImGui::EndMenuBar();
+                    }
+                }
 
                 for (auto& layer : m_LayerStack)
                     layer->OnUIRender();

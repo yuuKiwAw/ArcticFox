@@ -29,6 +29,8 @@ public:
     void Run();
     void Close();
 
+    void SetMenubarCallback(const std::function<void()>& menubarCallback) { m_MenubarCallback = menubarCallback; }
+
     float GetTime();
     int GetFPS();
     GLFWwindow* GetWindowHandle() const;
@@ -58,6 +60,7 @@ private:
     int m_FPS = 0;
 
     std::vector<std::shared_ptr<Layer>> m_LayerStack;
+    std::function<void()> m_MenubarCallback;
 };
 
 Application* CreateApplication(int argc, char** argv);

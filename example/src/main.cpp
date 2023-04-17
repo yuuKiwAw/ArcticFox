@@ -71,6 +71,17 @@ ArcticFox::Application* ArcticFox::CreateApplication(int argc, char** argv) {
 	ArcticFox::Application* app = new ArcticFox::Application(appSpec);
     app->PushLayer<ExampleLayer>();
     app->PushLayer<ExampleLayer2>();
+	app->SetMenubarCallback([app]()
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Exit"))
+			{
+				app->Close();
+			}
+			ImGui::EndMenu();
+		}
+	});
 
 	return app;
 }
