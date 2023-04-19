@@ -7,21 +7,14 @@ endif()
 
 set(PackageName "ArcticFox")
 
-set(IMGUI_GLFW_BACKENDS
-    "../third_part/imgui/backends/imgui_impl_glfw.h"
-    "../third_part/imgui/backends/imgui_impl_glfw.cpp"
-    "../third_part/imgui/backends/imgui_impl_opengl3.h"
-    "../third_part/imgui/backends/imgui_impl_opengl3.cpp"
-    "../third_part/imgui/backends/imgui_impl_opengl3_loader.h")
-aux_source_directory("../third_part/imgui" IMGUI_SRC)
 aux_source_directory(src SRC_DIR)
-add_library(ArcticFox SHARED ${IMGUI_SRC} ${IMGUI_GLFW_BACKENDS} ${SRC_DIR})
+add_library(ArcticFox SHARED ${IMGUI_SRC} ${IMGUI_NODE_EDITOR_SRC} ${SRC_DIR})
 
 target_include_directories(ArcticFox PRIVATE include)
-target_include_directories(ArcticFox PRIVATE ../third_part)
-target_include_directories(ArcticFox PRIVATE ../third_part/glfw/include)
-target_include_directories(ArcticFox PRIVATE ../third_part/glm)
-target_include_directories(ArcticFox PRIVATE ../third_part/imgui)
+target_include_directories(ArcticFox PRIVATE ${CMAKE_SOURCE_DIR}/third_part/glfw/include)
+target_include_directories(ArcticFox PRIVATE ${CMAKE_SOURCE_DIR}/third_part/glm)
+target_include_directories(ArcticFox PRIVATE ${IMGUI_PATH})
+target_include_directories(ArcticFox PRIVATE ${IMGUI_NODE_EDITOR_PATH})
 
 if(WIN32)
     target_link_libraries(ArcticFox PRIVATE opengl32.lib)
@@ -65,17 +58,8 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 install(DIRECTORY include/ DESTINATION include/ArcticFox)
-install(
-    FILES    
-        "../third_part/imgui/imgui.h"
-        "../third_part/imgui/imconfig.h"
-        "../third_part/imgui/imgui_internal.h"
-        "../third_part/imgui/imstb_rectpack.h"
-        "../third_part/imgui/imstb_textedit.h"
-        "../third_part/imgui/imstb_truetype.h"
-    DESTINATION
-        include/imgui
-    )
+install(FILES ${IMGUI_HEADS} DESTINATION include/imgui)
+install(FILES ${IMGUI_NODE_EDITOR_HEADS} DESTINATION include/imgui_node_editor)
 
 install(
     FILES
