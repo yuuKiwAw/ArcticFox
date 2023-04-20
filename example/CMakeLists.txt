@@ -1,12 +1,12 @@
 project(example)
 
-add_executable(example_ArcticFox_App
-    "src/main.cpp"
-)
+include_directories(../ArcticFox/include)
+include_directories(../third_part/glfw/include)
+include_directories(../third_part/glm)
+include_directories(../third_part)
+include_directories(../third_part/imgui)
 
-target_link_libraries(example_ArcticFox_App PRIVATE ArcticFox)
+add_subdirectory(node_editor_example)
 
-target_include_directories(example_ArcticFox_App PRIVATE ../ArcticFox/include)
-target_include_directories(example_ArcticFox_App PRIVATE ../third_part/glfw/include)
-target_include_directories(example_ArcticFox_App PRIVATE ../third_part/glm)
-target_include_directories(example_ArcticFox_App PRIVATE ../third_part)
+add_executable(simple_app "simple_app.cpp")
+target_link_libraries(simple_app PRIVATE ArcticFox)
