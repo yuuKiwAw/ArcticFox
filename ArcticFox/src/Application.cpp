@@ -140,8 +140,15 @@ namespace ArcticFox {
 
 	    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-
-        m_WindowHandle = glfwCreateWindow(m_Specification.Width, m_Specification.Height, m_Specification.Name.c_str(), NULL, NULL);
+		
+        m_MonitorHandle = m_Specification.Fullscreen ? glfwGetPrimaryMonitor() : nullptr;
+        if (m_MonitorHandle != nullptr && m_Specification.AutoSize)
+        {
+	        const GLFWvidmode* mode = glfwGetVideoMode(m_MonitorHandle);
+			m_Specification.Width = mode->width;
+			m_Specification.Height = mode->height;
+        }
+        m_WindowHandle = glfwCreateWindow(m_Specification.Width, m_Specification.Height, m_Specification.Name.c_str(), m_MonitorHandle, NULL);
         if (m_WindowHandle== NULL)
 		    return ;
         glfwMakeContextCurrent(m_WindowHandle);

@@ -17,6 +17,8 @@ struct ApplicationSpecification {
     std::string Name = "ArcticFox App";
     uint32_t Width = 1600;
     uint32_t Height = 900;
+    bool Fullscreen = false;
+    bool AutoSize = false;
 };
 
 class Application {
@@ -51,6 +53,7 @@ private:
 
 private:
     ApplicationSpecification m_Specification;
+    GLFWmonitor* m_MonitorHandle;
     GLFWwindow* m_WindowHandle;
     bool m_Running = false;
 

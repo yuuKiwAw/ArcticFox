@@ -58,8 +58,8 @@ public:
 	virtual void OnUIRender() override
 	{
 		ImGui::Begin("Hello ArcticFox2");
-		if (ImGui::Button("Button")) {
-
+		if (ImGui::Button("QUIT")) {
+			ArcticFox::Application::Get().Close();
         }
 		ImGui::End();
 	}
@@ -70,6 +70,8 @@ ArcticFox::Application* ArcticFox::CreateApplication(int argc, char** argv) {
 	appSpec.Name = "ArcticFox Example";
 	appSpec.Width = 800;
 	appSpec.Height = 600;
+	appSpec.Fullscreen = true;
+	appSpec.AutoSize = true;
 
 	ArcticFox::Application* app = new ArcticFox::Application(appSpec);
     app->PushLayer<ExampleLayer>();
