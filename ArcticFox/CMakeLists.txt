@@ -8,7 +8,7 @@ endif()
 set(PackageName "ArcticFox")
 
 aux_source_directory(src SRC_DIR)
-add_library(ArcticFox SHARED ${IMGUI_SRC} ${IMGUI_NODE_EDITOR_SRC} ${SRC_DIR})
+add_library(ArcticFox SHARED ${IMGUI_SRC} ${SRC_DIR})
 
 target_include_directories(ArcticFox PRIVATE include)
 target_include_directories(ArcticFox PRIVATE ${CMAKE_SOURCE_DIR}/third_part/glfw/include)

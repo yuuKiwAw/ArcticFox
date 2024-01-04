@@ -1,6 +1,7 @@
 .vs
 .cache
 .idea
+.vscode
 out
 build
 CMakeUserPresets.json

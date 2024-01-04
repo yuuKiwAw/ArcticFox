@@ -6,7 +6,5 @@ include_directories(../third_part/glm)
 include_directories(../third_part)
 include_directories(../third_part/imgui)
 
-add_subdirectory(node_editor_example)
-
 add_executable(simple_app "simple_app.cpp")
 target_link_libraries(simple_app PRIVATE ArcticFox)
