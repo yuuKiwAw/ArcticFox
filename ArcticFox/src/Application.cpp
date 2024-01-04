@@ -138,8 +138,8 @@ namespace ArcticFox {
 	    if (!glfwInit())
             return;
 
-	    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		
         m_MonitorHandle = m_Specification.Fullscreen ? glfwGetPrimaryMonitor() : nullptr;
         if (m_MonitorHandle != nullptr && m_Specification.AutoSize)
@@ -183,7 +183,7 @@ namespace ArcticFox {
 
         // Setup Platform/Renderer backends
 	    ImGui_ImplGlfw_InitForOpenGL(m_WindowHandle, true);
-	    ImGui_ImplOpenGL3_Init("#version 330");
+	    ImGui_ImplOpenGL3_Init("#version 460");
     }
 
     void Application::Shutdown() {
